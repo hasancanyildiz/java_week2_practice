@@ -4,7 +4,7 @@ public class Book {
     private int year;
     private String genre;
     private boolean available;
-
+    //constructor method
     public Book (String title,String author,int year,String genre, boolean available){
         this.title=title;
         this.author=author;
