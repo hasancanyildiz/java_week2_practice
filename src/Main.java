@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-
-        List<Book> books = LibraryData.creatSempleBooks();
-        BookRepository bookRepo =new BookRepository();
+        //used some var examples.
+        var books = LibraryData.creatSempleBooks();
+        var bookRepo =new BookRepository();
         // get the sample book list
         authorFinder(books, "Stephen King");
         sortedByYear(books);
@@ -23,8 +23,8 @@ public class Main {
         LibReport(books);
 
         //equel test
-        Book b1 = new Book("Dune", "Frank Herbert", 1965, "Sci-Fi", false);
-        Book b2 = new Book("Dune", "Frank Herbert", 1965, "Sci-Fi", false);
+        var b1 = new Book("Dune", "Frank Herbert", 1965, "Sci-Fi", false);
+        var b2 = new Book("Dune", "Frank Herbert", 1965, "Sci-Fi", false);
         System.out.println("equals: " + b1.equals(b2)); // it should be true
         optionalExamples(books, bookRepo );
 
