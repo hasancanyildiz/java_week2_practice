@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         List<Book> books = LibraryData.creatSempleBooks();
+        BookRepository bookRepo =new BookRepository();
         // get the sample book list
         authorFinder(books, "Stephen King");
         sortedByYear(books);
@@ -25,6 +26,7 @@ public class Main {
         Book b1 = new Book("Dune", "Frank Herbert", 1965, "Sci-Fi", false);
         Book b2 = new Book("Dune", "Frank Herbert", 1965, "Sci-Fi", false);
         System.out.println("equals: " + b1.equals(b2)); // it should be true
+        optionalExamples(books, bookRepo );
 
 
 
@@ -113,6 +115,27 @@ public class Main {
                 System.out.println(genre + "  :" + genreBooks.size() + " Average year of the book: " + avgYear);
 
             }
+        }
+
+        private static void optionalExamples(List<Book> books, BookRepository repo){
+            Book found = repo.findByTitle(books,"Dune").orElseThrow(() -> new RuntimeException("Not found"));
+            System.out.println("Found :" +found.title());
+            // Book found_2 = repo.findByTitle(books,"Faust").orElseThrow(() -> new RuntimeException("Not found"));
+// System.out.println("Found :" +found_2.title());
+            repo.findByTitle(books,"1984")
+                   .ifPresent(b ->System.out.println("if present : "+b.title()));
+
+            Book result =repo.findByTitle(books,"Harry Potter")
+                    .orElse(new Book("Unknown", "Unknown", 0, "Unknown", false));
+            System.out.println("orElse :"+result.title());
+
+            String title = repo.findByTitle(books, "Dune")
+                    .map(b -> b.title())
+                    .orElse("Not found");
+            System.out.println("map: " + title);
+
+            repo.findLatestBook(books)
+                    .ifPresent(b -> System.out.println("Most recent: " + b.title()));
         }
 
 
