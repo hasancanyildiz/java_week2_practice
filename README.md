@@ -8,6 +8,8 @@ The app works with a list of 18 books. Each book has a title, author, year, genr
 
 ## What I practiced
 
+- Java Stream API
+- Lambda expressions
 - Filter books by author
 - Sort by year and genre
 - Get titles of available books
@@ -15,10 +17,20 @@ The app works with a list of 18 books. Each book has a title, author, year, genr
 - Count books per genre
 - Calculate average publish year
 - Print a genre report with nested streams
+- Java `Optional`
+- Java `record`
 
 ## How to run
 
 Open in IntelliJ, run `Main.java`, and check the console output.
+## Technologies
+
+- Java 21 (or your Java version)
+- Stream API
+- Lambda Expressions
+- Optional
+- Records
+- Collections Framework
 
 ## Resources I used
 
