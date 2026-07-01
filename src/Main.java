@@ -20,43 +20,51 @@ public class Main {
         printCountOfGenres(books);
         printAvgYear(books);
         LibReport(books);
+
+        //equel test
+        Book b1 = new Book("Dune", "Frank Herbert", 1965, "Sci-Fi", false);
+        Book b2 = new Book("Dune", "Frank Herbert", 1965, "Sci-Fi", false);
+        System.out.println("equals: " + b1.equals(b2)); // it should be true
+
+
+
     }
     // find books by one author
         private static void authorFinder(List<Book> books, String author){
             System.out.println(author +"Books:");
-            books.stream().filter(b -> b.getAuthor().equals(author))
+            books.stream().filter(b -> b.author().equals(author))
                     .forEach(System.out::println);
 
         }
         //sort methods:
         private static void sortedByYear (List<Book> books){
             System.out.println("Sorted by year : ");
-            books.stream().sorted(Comparator.comparing(Book::getYear))
+            books.stream().sorted(Comparator.comparing(Book::year))
                     .forEach(System.out::println);
         }
     // sort books by year
         private static void reversSortedByYear (List<Book>books){
             System.out.println("Revers sorted by year : ");
-            books.stream().sorted(Comparator.comparing(Book::getYear).reversed())
+            books.stream().sorted(Comparator.comparing(Book::year).reversed())
                     .forEach(System.out::println);
         }
         // sort first by genre
         private static void sortedByGenreAndYear(List<Book> books) {
             System.out.println("Sorted by genre after year: ");
             books.stream()
-                    .sorted(Comparator.comparing(Book::getGenre)
-                            .thenComparing(Book::getYear)).forEach(System.out::println);
+                    .sorted(Comparator.comparing(Book::genre)
+                            .thenComparing(Book::year)).forEach(System.out::println);
         }
         // get only the titles of all books
         private static void printOfAllTitles(List<Book> books){
-            List<String> titles =books.stream().map(Book::getTitle)
+            List<String> titles =books.stream().map(Book::title)
                     .collect(Collectors.toList());
             System.out.println("All titles :");
             titles.forEach(System.out::println);
         }
         // get titles of books that are available now
         private static void printOfAvailableTitles(List<Book> books){
-            List<String> availableTitles =books.stream().filter(Book::isAvailable).map(Book::getTitle)
+            List<String> availableTitles =books.stream().filter(Book::available).map(Book::title)
                     .collect(Collectors.toList());
             System.out.println("All available titles :");
             availableTitles.forEach(System.out::println);
@@ -65,11 +73,11 @@ public class Main {
         // group books by genre
         private static void printGroupingByGenre(List<Book> books){
             Map<String,List<Book>> byGenre =books.stream()
-                    .collect(Collectors.groupingBy(Book::getGenre));
+                    .collect(Collectors.groupingBy(Book::genre));
             for (Map.Entry<String,List<Book>> entry :byGenre.entrySet()){
                 System.out.println(entry.getKey() + ":");
                 for (Book b : entry.getValue()) {
-                    System.out.println("  " + b.getTitle());
+                    System.out.println("  " + b.title());
                 }
 
             }
@@ -77,7 +85,7 @@ public class Main {
     // count how many books are in each genre
         private static void printCountOfGenres(List<Book> books){
             Map<String,Long> countByGenre = books.stream()
-                    .collect(Collectors.groupingBy(Book::getGenre,Collectors.counting()));
+                    .collect(Collectors.groupingBy(Book::genre,Collectors.counting()));
             for (Map.Entry<String, Long> entry : countByGenre.entrySet()){
                 System.out.println(entry.getKey() + ":"+ entry.getValue());
 
@@ -86,19 +94,19 @@ public class Main {
         }// find the average publish year of all books
         private static void printAvgYear(List<Book> books){
             System.out.println("Average Year");
-            double avgYear =books.stream().mapToInt(Book::getYear).average().orElse(0);
+            double avgYear =books.stream().mapToInt(Book::year).average().orElse(0);
             System.out.println("average: " + avgYear);
         }
     // make a small report: book count and average year for each genre
         private static void LibReport(List<Book> books){
             System.out.println("Library Report :");
             Map <String,List<Book>>  byGenre = books.stream()
-                    .collect(Collectors.groupingBy(Book::getGenre));
+                    .collect(Collectors.groupingBy(Book::genre));
             for (Map.Entry<String,List<Book>>entry:byGenre.entrySet()){
                 String genre = entry.getKey();
                 List<Book> genreBooks = entry.getValue();
                 double avgYear = genreBooks.stream()
-                        .mapToInt(Book::getYear)
+                        .mapToInt(Book::year)
                         .average()
                         .orElse(0);
 
@@ -106,7 +114,6 @@ public class Main {
 
             }
         }
-
 
 
 }
