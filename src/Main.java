@@ -12,10 +12,22 @@ public class Main {
         // get the sample book list
         bookRepo.authorFinder(books, "Stephen King");
         //maka a sorter object and use to sort
-        BookSorter sorter = new BookSorter();
-        sorter.sortedByYear(books);
-        sorter.reversSortedByYear(books);
-        sorter.sortedByGenreAndYear(books);
+        System.out.println();
+        System.out.println("Sorted by year ");
+        BookSorter sorter = new BookSorter(new SortByYear());
+        sorter.sort(books).forEach(System.out::println);
+
+        System.out.println();
+        System.out.println(" Sorted by year reversed ");
+        BookSorter sorter2 = new BookSorter(new ReversSortedByYear());
+        sorter2.sort(books).forEach(System.out::println);
+
+        System.out.println();
+        System.out.println(" Sorted by genre then year ");
+        BookSorter sorter3 = new BookSorter(new SortedByGenreAndYear());
+        sorter3.sort(books).forEach(System.out::println);
+
+
 
         BookReportService reportService =new BookReportService();
 
