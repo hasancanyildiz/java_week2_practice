@@ -26,4 +26,11 @@ public class BookRepository {
 
 
     }
+    // find books by one author
+    public void authorFinder(List<Book> books, String author){
+        System.out.println(author +"Books:");
+        books.stream().filter(b -> b.author().equals(author))
+                .forEach(System.out::println);
+
+    }
 }
