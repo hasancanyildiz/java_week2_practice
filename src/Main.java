@@ -27,10 +27,14 @@ public class Main {
         BookSorter sorter3 = new BookSorter(new SortedByGenreAndYear());
         sorter3.sort(books).forEach(System.out::println);
 
+        System.out.println();
 
+        BookReportService reportService = new BookReportService(new ConsoleNotification());
+        reportService.LibReport(books);
 
-        BookReportService reportService =new BookReportService();
-
+        BookReportService reportService2 = new BookReportService(new EmailNotification());
+        reportService2.LibReport(books);
+        System.out.println();
         reportService.printOfAllTitles(books);
         reportService.printOfAvailableTitles(books);
         reportService.printGroupingByGenre(books);

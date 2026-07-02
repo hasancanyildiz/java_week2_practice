@@ -3,6 +3,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BookReportService {
+    private NotificationService notificationService;
+
+    public BookReportService(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
     // get only the titles of all books
     public void printOfAllTitles(List<Book> books){
         List<String> titles =books.stream().map(Book::title)
@@ -61,5 +66,6 @@ public class BookReportService {
             System.out.println(genre + "  :" + genreBooks.size() + " Average year of the book: " + avgYear);
 
         }
+        notificationService.notify("Library report is ready!");
     }
 }
