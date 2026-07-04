@@ -5,6 +5,17 @@ import java.util.Optional;
 public class BookRepository {
     //It doesn't use Optional.of(), Optional.ofNullable() and Optional.empty() because .findFirst() returns optional in the streams.
     //find the first book that matches the given title
+
+    private static BookRepository instance;
+    private BookRepository(){
+    }
+    public static BookRepository getInstance(){
+        if (instance== null){
+            instance = new BookRepository();
+        }
+        return  instance;
+
+    }
     public Optional<Book> findByTitle(List<Book> books, String title) {
         return books.stream()
                 .filter(b ->b.title().equals(title))

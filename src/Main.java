@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         //used some var examples.
         var books = LibraryData.creatSempleBooks();
-        var bookRepo =new BookRepository();
+        var  bookRepo =BookRepository.getInstance();
         // get the sample book list
         bookRepo.authorFinder(books, "Stephen King");
         //maka a sorter object and use to sort
@@ -29,10 +29,11 @@ public class Main {
 
         System.out.println();
 
-        BookReportService reportService = new BookReportService(new ConsoleNotification());
+        //Factory pattern part
+        BookReportService reportService = new BookReportService(NotificationFactory.creatNotification("console"));
         reportService.LibReport(books);
 
-        BookReportService reportService2 = new BookReportService(new EmailNotification());
+        BookReportService reportService2 =new BookReportService(NotificationFactory.creatNotification("email"));
         reportService2.LibReport(books);
         System.out.println();
         reportService.printOfAllTitles(books);
@@ -60,11 +61,7 @@ public class Main {
         System.out.println("The Book that I used builder pattern");
         System.out.println(bookBuild);
 
-        //Factory pattern part
-        BookReportService reportService_1 = new BookReportService(NotificationFactory.creatNotification("console"));
-        reportService_1.LibReport(books);
-        BookReportService reportService_2 =new BookReportService(NotificationFactory.creatNotification("email"));
-        //BookReportService reportService_3 =new BookReportService(NotificationFactory.creatNotification("sms"));
+
 
 
 
