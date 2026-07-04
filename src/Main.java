@@ -49,6 +49,18 @@ public class Main {
         optionalExamples(books, bookRepo );
 
 
+        //Builder pattern part
+        Book bookBuild = new BookBuilder()
+                .title("Dune")
+                .author("Frank Herbert")
+                .year(1965)
+                .genre("Sci-Fi")
+                .available(false)
+                .build();
+        System.out.println("The Book that I used builder pattern");
+        System.out.println(bookBuild);
+
+
 
     }
 
