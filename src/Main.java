@@ -48,7 +48,7 @@ public class Main {
         System.out.println("equals: " + b1.equals(b2)); // it should be true
         optionalExamples(books, bookRepo );
 
-
+        //Day 4 Pattern applications
         //Builder pattern part
         Book bookBuild = new BookBuilder()
                 .title("Dune")
@@ -59,6 +59,12 @@ public class Main {
                 .build();
         System.out.println("The Book that I used builder pattern");
         System.out.println(bookBuild);
+
+        //Factory pattern part
+        BookReportService reportService_1 = new BookReportService(NotificationFactory.creatNotification("console"));
+        reportService_1.LibReport(books);
+        BookReportService reportService_2 =new BookReportService(NotificationFactory.creatNotification("email"));
+        //BookReportService reportService_3 =new BookReportService(NotificationFactory.creatNotification("sms"));
 
 
 
